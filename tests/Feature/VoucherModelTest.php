@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 
@@ -35,5 +36,19 @@ class VoucherModelTest extends TestCase
 
         $voucher = Voucher::withTrashed()->where('name', 'Pulsa')->first();
         assertNotNull($voucher);
+    }
+
+    public function testLocalScope()
+    {
+        $voucher = new Voucher();
+        $voucher->name = "Promo";
+        $voucher->is_active = true;
+        $voucher->save();   
+        
+        $total = Voucher::active()->count();
+        assertEquals(1, $total);
+
+        $total = Voucher::nonActive()->count();
+        assertEquals(0, $total);
     }
 }

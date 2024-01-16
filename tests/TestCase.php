@@ -15,5 +15,7 @@ abstract class TestCase extends BaseTestCase
         
         DB::delete('DELETE FROM categories');
         DB::delete('DELETE FROM vouchers');
+        DB::delete('DELETE FROM customers');
+        DB::delete('DELETE FROM wallets');
     }
 }

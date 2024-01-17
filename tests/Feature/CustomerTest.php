@@ -55,4 +55,5 @@ class CustomerTest extends TestCase
         assertNotNull($virtualAccount);
         assertEquals('BCA', $virtualAccount->bank);
     }
+
 }
